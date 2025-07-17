@@ -3,451 +3,364 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amalan Air Susu Putih - Pondok Queen Ainul Yaqien (Versi 2)</title>
+    <title>Sistem Informasi Pesantren</title>
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet"> <!-- For Arabic script -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet"> <!-- For main titles -->
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <style>
+        /* Custom styles */
         body {
             font-family: 'Inter', sans-serif;
-            /* Deeper, richer green background with a subtle pattern/texture feel */
-            background: linear-gradient(135deg, #e0f7fa 0%, #c8e6c9 50%, #b3e0b5 100%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem; /* More generous padding */
-            color: #374151;
-            overflow-x: hidden;
+            background-color: #f0f4f8; /* Light blue-gray background */
         }
-        .main-wrapper {
-            max-width: 950px; /* Slightly wider overall container */
-            width: 100%;
-            border-radius: 2.5rem; /* Even more rounded */
-            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.3); /* Deeper shadow */
-            background-color: #ffffff;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInSlideUp 1s ease-out forwards; /* Slower, smoother animation */
-            animation-delay: 0.4s;
+        .nav-link {
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
         }
-
-        @keyframes fadeInSlideUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .nav-link.active, .nav-link:hover {
+            color: #10B981; /* Emerald-500 */
+            border-bottom-color: #10B981;
         }
-
-        .header {
-            background: linear-gradient(to right, #00796b, #4db6ac); /* Teal-like gradient */
-            padding: 2rem 2.5rem; /* Larger padding */
-            display: flex;
-            flex-direction: column; /* Stack logo on top of text */
-            justify-content: center;
-            align-items: center;
-            color: white;
-            position: relative;
-            z-index: 10;
-            text-align: center; /* Center align header content */
-        }
-        .header-top-row {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            margin-bottom: 1rem; /* Space between top row and main title */
-            align-items: center;
-        }
-        .header-logo-container {
-            margin-bottom: 0.5rem; /* Space between logo image and text */
-        }
-        .header-logo-container img {
-            width: 100px; /* Adjust logo size as needed */
-            height: auto;
-            border-radius: 0.75rem; /* Slightly rounded corners for the logo image */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow for the logo */
-            display: block; /* Remove extra space below image */
-            margin: 0 auto; /* Center the image */
-        }
-
-        .logo-text {
-            font-weight: 700;
-            font-size: 1.5rem; /* Larger main title */
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            transition: transform 0.3s ease;
-            margin-top: 1rem; /* Space from actual logo image */
-        }
-        .logo-text:hover {
-            transform: translateX(0); /* No translation hover for main title */
-        }
-        .faedah-text {
-            font-size: 1.125rem; /* Smaller for faedah text */
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr; /* Default to single column */
-            gap: 2.5rem; /* More space between sections */
-            padding: 3rem; /* Generous padding for the grid area */
-        }
-        @media (min-width: 768px) { /* Two columns on larger screens */
-            .content-grid {
-                grid-template-columns: 2fr 1fr; /* Main content wider than sidebar */
-                gap: 3rem;
-            }
-        }
-
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            gap: 2.5rem;
-        }
-        .sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 2.5rem;
-        }
-
-        .section-card {
-            background-color: #f9fafb; /* Light gray background for cards */
-            border-radius: 1.25rem; /* Rounded corners for cards */
-            padding: 2rem;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08); /* Card shadow */
-            border: 1px solid #e0f2f7; /* Subtle card border */
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .section-card:hover {
-            transform: translateY(-5px); /* Lift card on hover */
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
         }
-
-        .article-title {
-            font-family: 'Playfair Display', serif; /* Elegant serif font for title */
-            color: #004d40; /* Darker, sophisticated green */
-            font-size: 3.5rem; /* Even larger title */
-            font-weight: 900; /* Extra bold */
-            text-align: center;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        .page {
+            display: none; /* All pages are hidden by default */
         }
-        .article-subtitle {
-            font-family: 'Playfair Display', serif;
-            color: #26a69a; /* Brighter teal for subtitle */
-            font-size: 1.75rem; /* Larger subtitle */
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 2.5rem;
+        .page.active {
+            display: block; /* The active page is shown */
         }
-
-        .section-heading {
-            font-weight: 800; /* Bolder heading */
-            color: #00695c; /* Very dark green for headings */
-            font-size: 1.5rem; /* Larger section headings */
-            margin-bottom: 1.25rem;
-            position: relative;
-            padding-left: 1.5rem; /* Space for accent line */
-            border-bottom: 2px solid #b2dfdb; /* Subtle underline effect */
-            padding-bottom: 0.5rem; /* Space below underline */
+        .btn {
+            transition: all 0.3s ease;
         }
-        .section-heading::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 8px;
-            height: 8px;
-            background-color: #4db6ac; /* Accent color dot */
-            border-radius: 50%;
-            box-shadow: 0 0 8px rgba(77, 182, 172, 0.6); /* Glow effect */
-        }
-
-        .article-paragraph {
-            font-size: 1.1rem; /* Slightly refined text size */
-            line-height: 1.8;
-            color: #546e7a; /* Muted gray for body text */
-            margin-bottom: 1rem;
-        }
-        .article-paragraph strong {
-            color: #00796b; /* Strong emphasis color */
-            font-weight: 700;
-        }
-
-        .arabic-text-container {
-            text-align: center;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            position: relative;
-        }
-        .arabic-text-large {
-            font-family: 'Amiri', serif;
-            font-size: 2.8rem; /* Prominent Arabic text */
-            font-weight: 700;
-            color: #004d40; /* Darker green for Arabic */
-            line-height: 1.6;
-            transition: color 0.3s ease;
-        }
-        .arabic-text-large:hover {
-            color: #00897b; /* Slightly lighter on hover */
-        }
-        .arabic-translation {
-            font-size: 1.05rem;
-            font-style: italic;
-            color: #78909c; /* Muted gray for translation */
-            margin-top: 0.5rem;
-        }
-
-        .list-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 0.75rem;
-            font-size: 1.05rem;
-            color: #546e7a;
-        }
-        .list-item svg {
-            flex-shrink: 0;
-            margin-right: 0.75rem;
-            color: #4db6ac; /* Green checkmark */
-            width: 1.25rem;
-            height: 1.25rem;
-        }
-
-        .image-container {
-            border-radius: 1.5rem;
-            overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-            margin-top: 2rem;
-            margin-bottom: 2rem;
-            transition: transform 0.4s ease;
-        }
-        .image-container:hover {
-            transform: scale(1.01); /* Subtle zoom on hover */
-        }
-        .image-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .callout-box-v2 {
-            background: linear-gradient(45deg, #e0f2f7, #b2ebf2); /* Blueish-green gradient for distinction */
-            border: 1px solid #80deea;
-            border-radius: 1.5rem;
-            padding: 2rem;
-            text-align: center;
-            font-style: italic;
-            color: #006064; /* Dark teal */
-            font-weight: 600;
-            box-shadow: inset 0 0 15px rgba(0, 150, 136, 0.2); /* Inner glow */
-            position: relative;
-            overflow: hidden;
-        }
-        .callout-box-v2::before, .callout-box-v2::after {
-            content: '“';
-            position: absolute;
-            font-size: 5rem; /* Larger quotes */
-            color: rgba(0, 150, 136, 0.1); /* Lighter teal for quotes */
-            line-height: 1;
-        }
-        .callout-box-v2::before { top: -0.5rem; left: 1rem; }
-        .callout-box-v2::after { bottom: -0.5rem; right: 1rem; }
-
-
-        .footer {
-            background-color: #004d40; /* Very dark green footer */
+        .btn-primary {
+            background-color: #059669; /* Emerald-600 */
             color: white;
-            text-align: center;
-            padding: 2rem;
-            border-radius: 2.5rem; /* Matches main container */
-            margin-top: 2.5rem;
-            width: 100%;
-            max-width: 950px;
-            box-shadow: 0 -15px 30px rgba(0, 0, 0, 0.15);
         }
-        .footer a {
-            color: #80cbc4; /* Lighter teal for footer links */
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        .footer a:hover {
-            color: #b2dfdb;
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            body { padding: 1.5rem; }
-            .main-wrapper { border-radius: 1.5rem; }
-            .header { padding: 1.5rem 2rem; }
-            .logo-text { font-size: 1.3rem; }
-            .faedah-text { font-size: 1rem; }
-            .article-title { font-size: 2.5rem; }
-            .article-subtitle { font-size: 1.3rem; }
-            .content-grid { padding: 2rem; gap: 2rem; }
-            .section-card { padding: 1.5rem; }
-            .section-heading { font-size: 1.3rem; }
-            .arabic-text-large { font-size: 2.2rem; }
-            .callout-box-v2 { padding: 1.5rem; }
-            .callout-box-v2::before, .callout-box-v2::after { font-size: 4rem; }
-            .footer { padding: 1.5rem; border-radius: 1.5rem; margin-top: 1.5rem; }
-        }
-
-        @media (max-width: 640px) {
-            body { padding: 1rem; }
-            .main-wrapper { border-radius: 1rem; animation-delay: 0.1s; }
-            .header {
-                padding: 1rem 1.25rem;
-                flex-direction: column; /* Stack header items */
-                gap: 0.75rem;
-                text-align: center;
-            }
-            .header-top-row {
-                flex-direction: column; /* Stack logo/faedah text vertically */
-                margin-bottom: 0.5rem;
-                gap: 0.5rem;
-            }
-            .header-logo-container img {
-                width: 80px; /* Smaller logo on mobile */
-            }
-            .logo-text { font-size: 1.2rem; margin-top: 0.5rem; }
-            .faedah-text { font-size: 0.9rem; margin-bottom: 0.5rem; }
-            .article-title { font-size: 2rem; margin-bottom: 0.75rem; }
-            .article-subtitle { font-size: 1rem; margin-bottom: 1.5rem; }
-            .content-grid { padding: 1.5rem; gap: 1.5rem; }
-            .section-card { padding: 1.25rem; border-radius: 1rem; }
-            .section-heading { font-size: 1.1rem; padding-left: 1rem; }
-            .section-heading::before { width: 6px; height: 6px; }
-            .article-paragraph { font-size: 0.95rem; line-height: 1.6; }
-            .arabic-text-large { font-size: 1.8rem; }
-            .arabic-translation { font-size: 0.85rem; }
-            .callout-box-v2 { padding: 1.25rem; border-radius: 1rem; }
-            .callout-box-v2::before, .callout-box-v2::after { font-size: 3rem; }
-            .footer { padding: 1rem; border-radius: 1rem; margin-top: 1rem; }
+        .btn-primary:hover {
+            background-color: #047857; /* Emerald-700 */
         }
     </style>
 </head>
-<body>
-    <div class="main-wrapper">
-        <!-- Header Section -->
-        <div class="header">
-            <div class="header-logo-container">
-                <!-- Actual logo image from uploaded file -->
-                <img
-                    src="Photoroom-20250117_161932 (1).png"
-                    onerror="this.onerror=null;this.src='https://placehold.co/100x100/ffffff/000000?text=Logo+Pondok+Queen';"
-                    alt="Logo Pondok Pesantren Queen"
-                />
+<body class="antialiased">
+
+    <!-- Header and Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fas fa-mosque text-3xl text-emerald-600"></i>
+                <a href="#" class="text-2xl font-bold text-gray-800" onclick="showPage('beranda')">Info Pesantren</a>
             </div>
-            <h1 class="logo-text">Pondok Queen Ainul Yaqien</h1>
-            <div class="faedah-text">
-                <!-- Icon for Faedah Amalan (Reused) -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                </svg>
-                <span>Faedah Amalan</span>
+            
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#" id="nav-beranda" class="nav-link font-medium text-gray-600" onclick="showPage('beranda')">Beranda</a>
+                <a href="#" id="nav-struktur" class="nav-link font-medium text-gray-600" onclick="showPage('struktur')">Struktur Pengurus</a>
+                <a href="#" id="nav-jadwal" class="nav-link font-medium text-gray-600" onclick="showPage('jadwal')">Jadwal</a>
+                <a href="#" id="nav-absensi" class="nav-link font-medium text-gray-600" onclick="showPage('absensi')">Absensi</a>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-800 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </nav>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <a href="#" class="block py-3 px-6 text-gray-600 hover:bg-emerald-50" onclick="showPage('beranda'); toggleMobileMenu();">Beranda</a>
+            <a href="#" class="block py-3 px-6 text-gray-600 hover:bg-emerald-50" onclick="showPage('struktur'); toggleMobileMenu();">Struktur Pengurus</a>
+            <a href="#" class="block py-3 px-6 text-gray-600 hover:bg-emerald-50" onclick="showPage('jadwal'); toggleMobileMenu();">Jadwal</a>
+            <a href="#" class="block py-3 px-6 text-gray-600 hover:bg-emerald-50" onclick="showPage('absensi'); toggleMobileMenu();">Absensi</a>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto p-4 md:p-8">
+
+        <!-- Page: Beranda (Home) -->
+        <div id="page-beranda" class="page">
+            <div class="text-center p-8 md:p-16 bg-white rounded-xl shadow-lg" style="background-image: url('https://www.transparenttextures.com/patterns/islamic.png');">
+                <h1 class="text-4xl md:text-5xl font-bold text-emerald-800 mb-4">Selamat Datang di Sistem Informasi Pesantren</h1>
+                <p class="text-lg text-gray-700 max-w-3xl mx-auto">Pusat informasi terpadu untuk semua kegiatan, jadwal, dan struktur organisasi di lingkungan pesantren kita. Mari wujudkan santri yang berakhlak mulia dan berprestasi.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+                <!-- Card 1: Struktur -->
+                <div class="card p-6 text-center cursor-pointer" onclick="showPage('struktur')">
+                    <i class="fas fa-sitemap text-4xl text-emerald-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-800">Struktur Pengurus</h3>
+                    <p class="text-gray-500 mt-2">Lihat jajaran pengurus dan dewan kiai.</p>
+                </div>
+                <!-- Card 2: Jadwal -->
+                <div class="card p-6 text-center cursor-pointer" onclick="showPage('jadwal')">
+                    <i class="fas fa-calendar-alt text-4xl text-blue-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-800">Semua Jadwal</h3>
+                    <p class="text-gray-500 mt-2">Akses jadwal ngajar, piket, dan lainnya.</p>
+                </div>
+                <!-- Card 3: Absensi -->
+                <div class="card p-6 text-center cursor-pointer" onclick="showPage('absensi')">
+                    <i class="fas fa-clipboard-check text-4xl text-yellow-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-800">Absensi Santri</h3>
+                    <p class="text-gray-500 mt-2">Link untuk mengisi presensi kegiatan.</p>
+                </div>
+                <!-- Card 4: Pengumuman -->
+                <div class="card p-6 text-center">
+                    <i class="fas fa-bullhorn text-4xl text-red-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-800">Pengumuman</h3>
+                    <p class="text-gray-500 mt-2">Informasi penting dan terbaru dari pesantren.</p>
+                </div>
             </div>
         </div>
 
-        <div class="content-grid">
-            <!-- Main Content Column -->
-            <div class="main-content">
-                <h2 class="article-title">Amalan Minum Susu Putih di Malam 1 Muharram</h2>
-                <p class="article-subtitle">Tradisi Luhur dari Abuya Sayyid Muhammad Alawi Al Maliki</p>
-
-                <div class="section-card">
-                    <h3 class="section-heading">Pengantar Amalan</h3>
-                    <p class="article-paragraph">Pada malam 1 Muharram, kita memiliki tradisi minum susu putih yang sebelumnya diawali dengan berdoa. Amalan ini berasal dari tradisi Abuya Sayyid Muhammad Alawi Al Maliki, seorang ulama terkenal yang merupakan keturunan Rasulullah saw di tanah suci. Mengapa minum susu putih di malam 1 Muharram?</p>
+        <!-- Page: Struktur Pengurus -->
+        <div id="page-struktur" class="page">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Struktur Pengurus Pesantren</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Person Card -->
+                <div class="card text-center p-6">
+                    <img src="https://placehold.co/150x150/E2E8F0/4A5568?text=Foto" alt="Foto Pengurus" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-emerald-200">
+                    <h3 class="text-xl font-bold text-gray-900">KH. Abdullah Maksum</h3>
+                    <p class="text-emerald-700 font-semibold">Pimpinan Pesantren</p>
                 </div>
-
-                <div class="section-card">
-                    <h3 class="section-heading">Makna dan Hikmah</h3>
-                    <p class="article-paragraph">Menurut Abuya Sayyid Muhammad Alawi Al Maliki, minum susu putih pada malam tersebut melambangkan <strong>permulaan tahun yang baru</strong>, yang bersih dan penuh dengan kebaikan. Susu putih, sebagai simbol kebersihan dan nutrisi, menjadi metafora untuk tahun yang putih, bersih, dan dipenuhi dengan kebaikan.</p>
+                <!-- Person Card -->
+                <div class="card text-center p-6">
+                    <img src="https://placehold.co/150x150/E2E8F0/4A5568?text=Foto" alt="Foto Pengurus" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-emerald-200">
+                    <h3 class="text-xl font-bold text-gray-900">Ustadz Ahmad Fauzi</h3>
+                    <p class="text-emerald-700 font-semibold">Ketua Pengurus</p>
                 </div>
-
-                <div class="section-card">
-                    <h3 class="section-heading">Cara Pengamalan</h3>
-                    <p class="article-paragraph">Untuk amalan minum susu putih ini dilakukan <strong>setelah Maghrib pada malam 1 Muharram hingga sebelum waktu Subuh</strong>. Caranya cukup sederhana:</p>
-                    <ul class="list-none mt-4">
-                        <li class="list-item">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span>Siapkan segelas susu hangat.</span>
-                        </li>
-                        <li class="list-item">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span>Lalu baca doa yang telah ditentukan sebelum meminumnya.</span>
-                        </li>
-                    </ul>
+                <!-- Person Card -->
+                <div class="card text-center p-6">
+                    <img src="https://placehold.co/150x150/E2E8F0/4A5568?text=Foto" alt="Foto Pengurus" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-emerald-200">
+                    <h3 class="text-xl font-bold text-gray-900">Ustadzah Fatimah Az-Zahra</h3>
+                    <p class="text-emerald-700 font-semibold">Kepala Bagian Pendidikan</p>
                 </div>
-
-                <div class="image-container">
-                    <img
-                        src="https://placehold.co/600x400/c8e6c9/004d40?text=Minum%20Susu%20Kebaikan"
-                        onerror="this.onerror=null;this.src='https://placehold.co/600x400/c8e6c9/004d40?text=Gambar%20Tidak%20Tersedia';"
-                        alt="Gambar ilustrasi minum susu di malam Muharram"
-                    />
-                </div>
-
-            </div>
-
-            <!-- Sidebar Column -->
-            <div class="sidebar">
-                <div class="section-card">
-                    <h3 class="section-heading">Bacaan Doa</h3>
-                    <div class="arabic-text-container">
-                        <p class="arabic-text-large">اَللّٰهُمَّ بَارِكْ لَنَا فِيْهِ وَزِدْنَا مِنْهُ</p>
-                        <p class="arabic-translation">Artinya: "Ya Allah, berkahilah kami di dalam air susu ini dan tambahlah keberkahan darinya."</p>
-                    </div>
-                </div>
-
-                <div class="section-card">
-                    <h3 class="section-heading">Siapa yang Boleh Mengamalkan?</h3>
-                    <p class="article-paragraph">Amalan ini boleh dilakukan bersama <strong>keluarga, murid, santri dan masyarakat di sekitar kita</strong>. Sehingga semuanya dapat turut merasakan berkah yang sama. Hal ini juga yang dijalankan oleh Abuya Sayyid Muhammad Alawi Al Maliki kepada para santrinya.</p>
-                </div>
-
-                <div class="section-card">
-                    <h3 class="section-heading">Manfaat dan Harapan</h3>
-                    <p class="article-paragraph">Selain meminumnya, beliau juga membagikan susu putih kepada para santrinya. Melalui cara ini, beliau berharap para santrinya juga akan meraih berkah dan menjalani tahun yang akan datang dengan baik dan penuh keberkahan.</p>
-                    <p class="article-paragraph">Maka dari itu amalan minum susu putih di malam 1 Muharram beserta dengan doa, merupakan wujud <strong>tafa’ul</strong> atau mengharap kebaikan di tahun baru Islam, sebagaimana yang rutin dilakukan oleh Abuya Sayyid Muhammad Alawi Al Maliki.</p>
-                </div>
-
-                <!-- Inspirational Quote Callout -->
-                <div class="callout-box-v2">
-                    <p>"Jadikan setiap awal sebagai pintu menuju kebaikan yang lebih besar."</p>
-                    <p class="mt-2 text-sm">- Inspirasi dari Tradisi Shalihin</p>
-                </div>
+                <!-- Add more cards as needed -->
             </div>
         </div>
-    </div>
+
+        <!-- Page: Jadwal (Combined) -->
+        <div id="page-jadwal" class="page space-y-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Pusat Informasi Jadwal</h2>
+            
+            <!-- Jadwal Mengajar Santri Luar -->
+            <div class="card p-6">
+                <h3 class="text-2xl font-semibold text-emerald-800 mb-4"><i class="fas fa-book-reader mr-2"></i>Jadwal Ngajar Santri Luar</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">Hari</th>
+                                <th scope="col" class="px-6 py-3">Waktu</th>
+                                <th scope="col" class="px-6 py-3">Kitab</th>
+                                <th scope="col" class="px-6 py-3">Pengajar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white border-b">
+                                <td class="px-6 py-4">Senin</td>
+                                <td class="px-6 py-4">16:00 - 17:00</td>
+                                <td class="px-6 py-4 font-medium text-gray-900">Safinatun Najah</td>
+                                <td class="px-6 py-4">Ustadz Ridwan</td>
+                            </tr>
+                            <tr class="bg-gray-50 border-b">
+                                <td class="px-6 py-4">Selasa</td>
+                                <td class="px-6 py-4">16:00 - 17:00</td>
+                                <td class="px-6 py-4 font-medium text-gray-900">Aqidatul Awam</td>
+                                <td class="px-6 py-4">Ustadz Hasan</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Jadwal Muthola'ah -->
+            <div class="card p-6">
+                <h3 class="text-2xl font-semibold text-blue-800 mb-4"><i class="fas fa-users mr-2"></i>Jadwal Muthola'ah</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500">
+                         <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">Malam</th>
+                                <th scope="col" class="px-6 py-3">Waktu</th>
+                                <th scope="col" class="px-6 py-3">Kelompok</th>
+                                <th scope="col" class="px-6 py-3">Pembimbing</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white border-b">
+                                <td class="px-6 py-4">Malam Selasa</td>
+                                <td class="px-6 py-4">20:00 - 21:00</td>
+                                <td class="px-6 py-4 font-medium text-gray-900">Kelompok Al-Farabi</td>
+                                <td class="px-6 py-4">Kang Zaki</td>
+                            </tr>
+                            <tr class="bg-gray-50 border-b">
+                                <td class="px-6 py-4">Malam Rabu</td>
+                                <td class="px-6 py-4">20:00 - 21:00</td>
+                                <td class="px-6 py-4 font-medium text-gray-900">Kelompok Ibn Sina</td>
+                                <td class="px-6 py-4">Kang Jamil</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Jadwal Imam (Naib Kiai) -->
+            <div class="card p-6">
+                <h3 class="text-2xl font-semibold text-purple-800 mb-4"><i class="fas fa-mosque mr-2"></i>Jadwal Imam (Naib Kiai)</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500">
+                         <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">Waktu Sholat</th>
+                                <th scope="col" class="px-6 py-3">Senin</th>
+                                <th scope="col" class="px-6 py-3">Selasa</th>
+                                <th scope="col" class="px-6 py-3">Rabu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white border-b">
+                                <td class="px-6 py-4 font-medium text-gray-900">Subuh</td>
+                                <td class="px-6 py-4">KH. Badruddin</td>
+                                <td class="px-6 py-4">KH. Sulaiman</td>
+                                <td class="px-6 py-4">KH. Badruddin</td>
+                            </tr>
+                            <tr class="bg-gray-50 border-b">
+                                <td class="px-6 py-4 font-medium text-gray-900">Maghrib</td>
+                                <td class="px-6 py-4">KH. Sulaiman</td>
+                                <td class="px-6 py-4">KH. Badruddin</td>
+                                <td class="px-6 py-4">KH. Sulaiman</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Jadwal Piket Santri -->
+            <div class="card p-6">
+                <h3 class="text-2xl font-semibold text-orange-800 mb-4"><i class="fas fa-broom mr-2"></i>Jadwal Piket Kebersihan Santri</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500">
+                         <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">Hari</th>
+                                <th scope="col" class="px-6 py-3">Area</th>
+                                <th scope="col" class="px-6 py-3">Petugas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white border-b">
+                                <td class="px-6 py-4">Senin</td>
+                                <td class="px-6 py-4 font-medium text-gray-900">Asrama Putra Blok A</td>
+                                <td class="px-6 py-4">Fulan, Alan, Budi</td>
+                            </tr>
+                            <tr class="bg-gray-50 border-b">
+                                <td class="px-6 py-4">Selasa</td>
+                                <td class="px-6 py-4 font-medium text-gray-900">Area Masjid & Wudhu</td>
+                                <td class="px-6 py-4">Dodi, Eka, Fikri</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Page: Absensi -->
+        <div id="page-absensi" class="page">
+            <div class="card max-w-2xl mx-auto p-8 text-center">
+                <i class="fas fa-file-signature text-6xl text-emerald-500 mb-6"></i>
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Absensi Kegiatan Santri</h2>
+                <p class="text-gray-600 mb-8">Silakan klik tombol di bawah ini untuk mengisi formulir absensi kegiatan. Pastikan Anda mengisi data dengan benar dan jujur.</p>
+                <a href="https://docs.google.com/forms/d/e/YOUR_FORM_ID_HERE/viewform" 
+                   target="_blank" 
+                   class="btn btn-primary inline-block text-lg font-semibold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105">
+                    <i class="fab fa-google-drive mr-2"></i> Buka Google Form
+                </a>
+                <p class="text-xs text-gray-400 mt-6">Anda akan diarahkan ke halaman baru. Pastikan Anda memiliki koneksi internet.</p>
+            </div>
+        </div>
+
+    </main>
 
     <!-- Footer -->
-    <footer class="footer">
-        <p>&copy; 2025 Pondok Queen Ainul Yaqien. Hak Cipta Dilindungi.</p>
-        <p class="mt-2 text-sm">
-            Kontak: <a href="mailto:info@pondokainulyaqien.com">info@pondokainulyaqien.com</a> |
-            Telepon: (085) 960 142 015
-        </p>
-        <div class="flex justify-center space-x-4 mt-4">
-            <a href="#" class="hover:underline">Facebook</a>
-            <a href="#" class="hover:underline">Instagram</a>
-            <a href="#" class="hover:underline">YouTube</a>
+    <footer class="bg-gray-800 text-white mt-12">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p>&copy; 2024 Sistem Informasi Pesantren. All Rights Reserved.</p>
+            <p class="text-gray-400 text-sm mt-2">Didesain dengan <i class="fas fa-heart text-red-500"></i> untuk kemajuan bersama.</p>
         </div>
     </footer>
-</body>
-</html>
 
+    <script>
+        // --- JavaScript for Page Navigation and Mobile Menu ---
+
+        const pages = document.querySelectorAll('.page');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // Function to show a specific page and hide others
+        function showPage(pageId) {
+            // Hide all pages
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Show the requested page
+            const activePage = document.getElementById('page-' + pageId);
+            if (activePage) {
+                activePage.classList.add('active');
+            }
+
+            // Update active state for navigation links
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            const activeLink = document.getElementById('nav-' + pageId);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+            
+            // For the combined 'Jadwal' menu item
+            if (['ngajar', 'mutholaah', 'imam', 'piket'].includes(pageId)) {
+                 document.getElementById('nav-jadwal').classList.add('active');
+            }
+            
+            // Scroll to top of the page on navigation
+            window.scrollTo(0, 0);
+        }
+
+        // Function to toggle the mobile menu
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Event listener for the mobile menu button
+        mobileMenuButton.addEventListener('click', toggleMobileMenu);
+
+        // Show the 'beranda' page by default on initial load
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage('beranda');
+        });
+
+    </script>
+
+</body>
+                        </html>
